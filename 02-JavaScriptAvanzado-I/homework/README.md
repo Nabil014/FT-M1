@@ -8,13 +8,13 @@ Determiná que será impreso en la consola, sin ejecutar el código.
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
 
 ```javascript
-x = 1;
-var a = 5;
+x = 1;         //Las variables declaradas se limitan al contexto de ejecución en el cual son declaradas. Las variables no declaradas siempre son globales.
+var a = 5;     //Las variables declaradas son creadas antes de ejecutar cualquier otro código. Las variables sin declarar no existen hasta que el código que las asigna es ejecutado.
 var b = 10;
 var c = function(a, b, c) {
   var x = 10;
-  console.log(x);
-  console.log(a);
+  console.log(x); 
+  console.log(a); 
   var f = function(a, b, c) {
     b = a;
     console.log(b);
@@ -22,11 +22,19 @@ var c = function(a, b, c) {
     var x = 5;
   }
   f(a,b,c);
-  console.log(b);
+  console.log(b); 
 }
 c(8,9,10);
-console.log(b);
+console.log(b);   
 console.log(x);
+/*
+   10 porque esta dentro de la funcion
+   8
+   8
+   9
+   10
+   1
+/*
 ```
 
 ```javascript
@@ -36,6 +44,11 @@ foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
+/*
+ERROR baz is not defined --- baz al no estar definida como bar no la sube
+undefined porque bar esta definida despues del console.log 
+
+
 ```
 
 ```javascript
@@ -44,6 +57,7 @@ if(true) {
     var instructor = "Franco";
 }
 console.log(instructor);
+// Franco porque console.log = true... si fuera if(false) me daria Tony
 ```
 
 ```javascript
@@ -56,6 +70,10 @@ console.log(instructor);
    }
 })();
 console.log(instructor);
+/* Tony
+   Franco
+   Tony
+/*
 ```
 
 ```javascript
@@ -69,28 +87,34 @@ if (true) {
 }
 console.log(instructor);
 console.log(pm);
+/* 
+   The Flash
+   Reverse Flash
+   The Flash
+   Franco porque esta construida con un let entonces no se puede pisar como el var
+/*
 ```
 ### Coerción de Datos
 
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3"  // 2
+"2" * "3"   //6
+4 + 5 + "px"   // 9px
+"$" + 4 + 5    // $45
+"4" - 2        // 2
+"4px" - 2      // NaN
+7 / 0          // infinity
+{}[0]          // [0]
+parseInt("09") // 9
+5 && 2         // 2
+2 && 5         // 5
+5 || 0         // 5
+0 || 5         // 5
+[3]+[3]-[10]   // 23
+3>2>1          // false
+[] == ![]      // true 
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -112,6 +136,9 @@ function test() {
 }
 
 test();
+// undefined
+// 2
+
 ```
 
 Y el de este código? :
@@ -128,6 +155,8 @@ function getFood(food) {
 }
 
 getFood(false);
+// undefined porque snack esta definida en otro contexto (osea fuera de la funcion)
+   // y porque le estoy dando como argumento un false en lugar de un true
 ```
 
 
@@ -153,6 +182,8 @@ var test = obj.prop.getFullname;
 
 console.log(test());
 ```
+//console.log(obj.prop.getFullname()); ----------> Aurelio de Rosa porque this hace referencia al objeto prop dentro de obj
+//console.log(test()); ---------> Juan Perez porque el this hace referencia al objeto global
 
 ### Event loop
 
@@ -168,3 +199,8 @@ function printing() {
 
 printing();
 ```
+/* Orden de muestra:
+1
+4
+3
+2

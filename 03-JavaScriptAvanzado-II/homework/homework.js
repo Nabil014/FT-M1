@@ -19,7 +19,12 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
+  var contador = 1
+  return function () {
+    return contador++;
+  }
 }
+
 
 function cacheFunction(cb) {
   /*
@@ -41,6 +46,15 @@ function cacheFunction(cb) {
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la caché cuál es el resultado de square(5) y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) 
 
   */
+  var memoriaCache = {}
+  return function (argumento) {
+    if (memoriaCache.hasOwnProperty(argumento)) {
+      return memoriaCache[argumento];
+    } else {
+      memoriaCache[argumento] = cb(argumento);
+    }
+    return memoriaCache[argumento];
+  }
 }
 
 // Bind
@@ -67,8 +81,8 @@ function getNombre() {
   Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
 */
 
-let getNombreInstructor;
-let getNombreAlumno;
+let getNombreInstructor = getNombre.bind(instructor);
+let getNombreAlumno = getNombre.bind(alumno);
 
 /*
   Ejercicio 4
@@ -80,9 +94,9 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos;
-let textoGuiones;
-let textoUnderscore;
+let textoAsteriscos = crearCadena.bind(this.textoAsteriscos, "*", "*");
+let textoGuiones = crearCadena.bind(this.textoGuiones, "-", "-");
+let textoUnderscore = crearCadena.bind(this.textoUnderscore, "_", "_");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
