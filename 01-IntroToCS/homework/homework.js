@@ -3,7 +3,6 @@
 function BinarioADecimal(num) {
   // tu codigo aca
   var binario = 0
-  // "1011" ["1","0","1","1"]
   // sumatoria D*2**i
   for (let i = 0; i < num.length; i++) {
     binario += num[i] * 2 ** [num.length - 1 - i];
