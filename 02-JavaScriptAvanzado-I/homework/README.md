@@ -47,8 +47,6 @@ baz = 2;
 /*
 ERROR baz is not defined --- baz al no estar definida como bar no la sube
 undefined porque bar esta definida despues del console.log 
-
-
 ```
 
 ```javascript
