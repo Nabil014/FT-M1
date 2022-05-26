@@ -1,6 +1,6 @@
 "use strict";
 
-// Closures
+// Closures: Un clousere es una funcion que retorna una funcion
 
 function counter() {
   /*
@@ -94,9 +94,9 @@ function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
-let textoAsteriscos = crearCadena.bind(this.textoAsteriscos, "*", "*");
-let textoGuiones = crearCadena.bind(this.textoGuiones, "-", "-");
-let textoUnderscore = crearCadena.bind(this.textoUnderscore, "_", "_");
+let textoAsteriscos = crearCadena.bind(this, "*", "*");
+let textoGuiones = crearCadena.bind(this, "-", "-");
+let textoUnderscore = crearCadena.bind(this, "_", "_");
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
